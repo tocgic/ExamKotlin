@@ -11,6 +11,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val textView = findViewById(R.id.tvHello) as TextView
-        textView.text = "Hi, Java!"
+        textView.text = "Hi, Kotlin!"
     }
 }
