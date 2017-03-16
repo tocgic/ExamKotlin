@@ -15,5 +15,5 @@ class ConvenientFromGenericFunc {
 //        }
 //    }
 
-    inline fun <reified T: Any> Gson.fromJson(json): T = this.fromJson(json, T::class.java)
+//    inline fun <reified T: Any> Gson.fromJson(json): T = this.fromJson(json, T::class.java)
 }
