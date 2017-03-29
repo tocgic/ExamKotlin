@@ -21,8 +21,8 @@ class FilteringAList {
         println()
 
         val lists = listOf(1..50, 3..10, 4..3)
-        //val lists = listOf(1..50, 3..10, 4..3 step -1) //compile Error
-        for (item in lists) {
+//        val lists = listOf(1..50, 3..10, (4..3 step -1)) //compile Error
+        for (item : IntRange in lists) {
             println("item:$item")
             for (x in item) {
                 print("\t$x")
