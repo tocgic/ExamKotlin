@@ -7,7 +7,8 @@ import org.junit.Test
  */
 class ClassesAndInheritance {
     @Test
-    fun test() {
+    fun classesTest() {
+        println("\n\n* classesTest()")
         val person = Person("Jay")
         val personSimple = PersonSimple("Jay")
         val customer = Customer("myNameIsJay")
@@ -25,8 +26,6 @@ class ClassesAndInheritance {
         println("dontCreteMe:${dontCreateMe.toString()}")
         dontCreateMe = DontCreateMe.instance
         println("dontCreteMe:${dontCreateMe.toString()}")
-
-        val myView = MyView(1, 2)
     }
 
     class Person constructor(firstName: String) {
@@ -124,23 +123,74 @@ class ClassesAndInheritance {
     }*/
 
     open class Base(p: Int) {
+        val pValue = p
+
         constructor(p: Int, q: Int) : this(p) {
+            println("Base, constructor(p: $p, q: $q)")
+        }
+
+        init {
+            println("Base, init")
+        }
+
+        open fun print() {
+            println("Base, open fun, print()")
+            println(this)
+        }
+    }
+
+    open class ChildBase : Base {
+        init {
+            println("ChildBase, init")
+        }
+        constructor(p: Int) : super(p) {
+            println("ChildBase, constructor(p: $p)")
+        }
+
+        // this / super 를 선택할 수 있다.
+        //constructor(p: Int, q: Int) : this(p) {
+        constructor(p: Int, q: Int) : super(p, q) {
+            println("ChildBase, constructor(p: $p, q: $q)")
+        }
+
+        final override fun print() {
+            println("ChildBase, open fun, print()")
+            println(this)
+            super.print()
+        }
+    }
+
+    class ChildChildBase : ChildBase {
+        constructor(p: Int) : super(p) {
 
         }
+        constructor(p: Int, q: Int) : super(p, q) {
+
+        }
+
+        /* error : 부모(ChildBase)의 print() fun은 final로 지정되어있어 override 할 수 없다.
+        override fun print() {
+
+        }*/
     }
 
     class Derived(p: Int) : Base(p)
 
-    class MyView : Base {
-        init {
-            println("MyView, init")
-        }
-        constructor(p: Int) : super(p) {
-            println("MyView, constructor(p: Int)")
-        }
+    @Test
+    fun inheritanceTest() {
+        println("\n\n* inheritanceTest()")
+        val childBase1 = ChildBase(1)
+        val childBase2 = ChildBase(1, 2)
 
-        constructor(p: Int, q: Int) : super(p, q) {
-            println("MyView, constructor(p: Int, q: Int)")
-        }
     }
+
+    @Test
+    fun overridingMethods() {
+        val childBase = ChildBase(1, 2)
+        println("\n\n* overridingMethods()")
+        childBase.print()
+    }
+
+    open class Animal
+    class Tiger() : Animal()
 }
